@@ -2,7 +2,7 @@ name: Sync From Remote Repo
 
 on:
   schedule:
-    - 0 0 * * * SUN
+    - cron: '0 0 * * SUN'
 
 jobs:
   sync:
