@@ -6,7 +6,7 @@ on:
   #   - cron: '* * * * *'
 
 jobs:
-  sync:
+  precheck:
     runs-on: ubuntu-latest
     
     steps:
@@ -22,5 +22,16 @@ jobs:
         run: |
           if [[ env.REMOTE_VERSION != env.LOCAL_VERSION ]]
           then
-            ls
+            echo "sync=1" >> $GITHUB_ENV
+          else
+            echo "sync=0" >> $GITHUB_ENV
           fi
+  
+  sync:
+    if: env.sync == 1
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Sync repos
+        run: echo "Syncing..."
+
