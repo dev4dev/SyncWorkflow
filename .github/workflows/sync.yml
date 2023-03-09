@@ -1,8 +1,9 @@
 name: Sync From Remote Repo
 
 on:
-  schedule:
-    - cron: '* * * * *'
+  workflow_dispatch:
+  # schedule:
+  #   - cron: '* * * * *'
 
 jobs:
   sync:
