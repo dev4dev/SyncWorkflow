@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Get remote version
         run: |
-          echo "REMOTE_VERSION=$(git ls-remote --tags --sort='-v:refname' https://github.com/dev4dev/ParentTestSDK | grep -P "refs/tags/v?\d+.\d+.\d+$" | head -n 1 | awk '{print $2}' | awk -F/ '{print $NF}')" >> $GITHU_ENV
+          echo "REMOTE_VERSION=$(git ls-remote --tags --sort='-v:refname' https://github.com/dev4dev/ParentTestSDK | grep -P "refs/tags/v?\d+.\d+.\d+$" | head -n 1 | awk '{print $2}' | awk -F/ '{print $NF}')" >> $GITHUB_ENV
       
       - name: Get local version
         run: |
