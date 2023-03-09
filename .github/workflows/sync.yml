@@ -20,5 +20,7 @@ jobs:
       
       - name: Compare versions
         run: |
-          echo "${{ env.REMOTE_VERSION }}"
-          echo "${{ env.LOCAL_VERSION }}"
+          if [[ env.REMOTE_VERSION != env.LOCAL_VERSION ]]
+          then
+            echo "sync"
+          fi
