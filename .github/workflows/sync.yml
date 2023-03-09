@@ -22,5 +22,5 @@ jobs:
         run: |
           if [[ env.REMOTE_VERSION != env.LOCAL_VERSION ]]
           then
-            echo "sync"
+            ls
           fi
