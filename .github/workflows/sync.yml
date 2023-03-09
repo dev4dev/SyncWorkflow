@@ -32,5 +32,5 @@ jobs:
 
     steps:
       - name: Sync repos
-        if: env.SYNC == 1
-        run: echo "Syncing..."
+        # if: env.SYNC == 1
+        run: echo "${{ env.SYNC }}"
