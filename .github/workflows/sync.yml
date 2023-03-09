@@ -6,7 +6,7 @@ on:
   #   - cron: '* * * * *'
 
 jobs:
-  precheck:
+  sync:
     runs-on: ubuntu-latest
     
     steps:
@@ -26,11 +26,7 @@ jobs:
           else
             echo "SYNC=0" >> $GITHUB_ENV
           fi
-  
-  sync:
-    runs-on: ubuntu-latest
-
-    steps:
+      
       - name: Sync repos
-        # if: env.SYNC == 1
+        if: env.SYNC == 1
         run: echo "${{ env.SYNC }}"
