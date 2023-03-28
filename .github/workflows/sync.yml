@@ -5,15 +5,19 @@ on:
   schedule:
     - cron: '0 0 * * SUN'
 
+# Set remote repo URL to track
+env:
+  REPO: https://github.com/dev4dev/ParentTestSDK
+
 jobs:
-  sync: # make sure the action works on a clean machine without building
+  sync:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: dev4dev/sync-from-remote-action@v1.0.4
         id: sync
         with:
-          source: 'https://github.com/dev4dev/ParentTestSDK'
+          source: ${{ env.REPO }}
       - name: Print result
         run: |
           echo ${{ steps.sync.outputs.synced }}
