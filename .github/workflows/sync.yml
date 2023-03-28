@@ -18,9 +18,11 @@ jobs:
           gitEmail: 'test@x-code.name'
       - name: Print result
         run: |
-          echo ${{ steps.sync.outputs.result }}
+          echo ${{ steps.sync.outputs.synced }}
       - name: Create Pull Request
+        if: ${{ steps.sync.outputs.synced }}
         uses: peter-evans/create-pull-request@v4
         with:
-          commit-message: "[auto update] Version: ${{ steps.sync.outputs.result.version }}"
-          title: "[auto update] Version: ${{ steps.sync.outputs.result.version }}"
+          commit-message: "[auto update] Version: ${{ steps.sync.outputs.version }}"
+          title: "[auto update] Version: ${{ steps.sync.outputs.version }}"
+          branch: "version/${{ steps.sync.outputs.version }}"
