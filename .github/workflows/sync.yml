@@ -6,27 +6,16 @@ on:
   #   - cron: '* * * * *'
 
 jobs:
-  sync:
+  sync: # make sure the action works on a clean machine without building
     runs-on: ubuntu-latest
-    
     steps:
-      - name: Get remote version
+      - uses: actions/checkout@v3
+      - uses: dev4dev/sync-from-remote-action
+        id: sync
+        with:
+          source: 'https://github.com/dev4dev/ParentTestSDK'
+          gitName: 'Alex A'
+          gitEmail: 'test@x-code.name'
+      - name: Print result
         run: |
-          echo "REMOTE_VERSION=$(git ls-remote --tags --sort='-v:refname' https://github.com/dev4dev/ParentTestSDK | grep -P "refs/tags/v?\d+.\d+.\d+$" | head -n 1 | awk '{print $2}' | awk -F/ '{print $NF}')" >> $GITHUB_ENV
-      
-      - name: Get local version
-        run: |
-          echo "LOCAL_VERSION=$(git tag --sort=-v:refname | head -n 1)" >> $GITHUB_ENV
-      
-      - name: Compare versions
-        run: |
-          if [[ env.REMOTE_VERSION != env.LOCAL_VERSION ]]
-          then
-            echo "SYNC=1" >> $GITHUB_ENV
-          else
-            echo "SYNC=0" >> $GITHUB_ENV
-          fi
-      
-      - name: Sync repos
-        if: env.SYNC == 1
-        run: echo "${{ env.SYNC }}"
+          echo ${{ steps.sync.outputs.result }}
