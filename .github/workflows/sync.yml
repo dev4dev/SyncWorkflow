@@ -26,3 +26,4 @@ jobs:
           commit-message: "[auto update] Version: ${{ steps.sync.outputs.version }}"
           title: "[auto update] Version: ${{ steps.sync.outputs.version }}"
           branch: "version/${{ steps.sync.outputs.version }}"
+          reviewers: dev4dev
