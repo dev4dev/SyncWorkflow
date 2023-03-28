@@ -11,4 +11,8 @@ public struct ParentTestSDK {
     public func kek() {
         print("Hello, Kek!")
     }
+
+    public func ok() {
+        //
+    }
 }
