@@ -2,20 +2,18 @@ name: Sync From Remote Repo
 
 on:
   workflow_dispatch:
-  # schedule:
-  #   - cron: '* * * * *'
+  schedule:
+    - cron: '0 0 * * SUN'
 
 jobs:
   sync: # make sure the action works on a clean machine without building
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: dev4dev/sync-from-remote-action@v1.0.1
+      - uses: dev4dev/sync-from-remote-action@v1.0.2
         id: sync
         with:
           source: 'https://github.com/dev4dev/ParentTestSDK'
-          gitName: 'Alex A'
-          gitEmail: 'test@x-code.name'
       - name: Print result
         run: |
           echo ${{ steps.sync.outputs.synced }}
